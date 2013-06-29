@@ -13,8 +13,10 @@ This code is still very immature, but it works, and we will try avoid changes to
 Hooks are generally used for lower level extensions, that sit in the middle of the existing work flow of an application to do extra things (act on or change information).  A single hook may end up invoking any number of functions from various different extensions.
 
 ```json
-hooks: {
-	'render': { api: '0.1.0', func: sanitize }
+{
+	hooks: {
+		'render': { api: '0.1.0', func: sanitize }
+	}
 }
 ```
 
@@ -23,10 +25,12 @@ hooks: {
 Plugins are generally used for higher level extensions, and rely on a unique keyword to call it.  Calling a plugin is guaranteed to execute at most 1 function (or none).  Note that the JSON used to register a plugin includes TWO keys, both the name of the hook it's plugging into AND the unique keyword it wants to be registered with.
 
 ```json
-plugins: {
-	tag: {
-		'b': { api: '0.1.0', func: bold },
-		'img': { api: '0.1.0', func: img }
+{
+	plugins: {
+		tag: {
+			'b': { api: '0.1.0', func: bold },
+			'img': { api: '0.1.0', func: img }
+		}
 	}
 }
 ```
@@ -70,7 +74,7 @@ hook you are using.
 
 **Extensions.runHookChain(hookName, initial)**
 
-```
+```js
 /**
  * Runs a 'chain' of hooks (the output of each func is the input of the next)
  * @param {String} hookName - e.g. 'render'
@@ -85,7 +89,7 @@ Let extensions change a document object before being inserted into the database.
 
 *App:*
 
-```
+```js
 function newDoc(name, content) {
 	var doc = { name: name, content: content }
 	doc = Extensions.runHookChain('storyInsert', doc);
@@ -95,12 +99,14 @@ Extension.registerHook('storyInsert', '0.1.0');
 ```
 
 *Extension:*
-```
-...
-  hooks: {
-  	'storyInsert': { api: '0.1.0', func: addTags_storyInsert }
-  }
-...
+```js
+Extensions.add({
+	// ...
+	  hooks: {
+	  	'storyInsert': { api: '0.1.0', func: addTags_storyInsert }
+	  }
+	// ...
+});
 function addTags_storyInsert(doc) {
 	doc.tags = findTagsInContent(doc.content);
 	return doc;
@@ -109,7 +115,7 @@ function addTags_storyInsert(doc) {
 
 **Extensions.runFirstTrueHook = function(hookName, data)**
 
-```
+```js
 /**
  * Run the first matching hook function for the given data, usually used to see if we
  * have any other extensions that will handle a case before we continue with the
@@ -121,7 +127,7 @@ function addTags_storyInsert(doc) {
  ```
 
 **Extensions.runHooks = function(hookName, data)**
-```
+```js
 /**
  * Run all the hookName hooks.  Use this for non-chained input.
  * @param {String} hookName - e.g. 'render'
@@ -130,7 +136,7 @@ function addTags_storyInsert(doc) {
  ```
 
 **Extensions.runPlugin = function(hookName, pluginName, args)**
-```
+```js
 /**
   * Runs the KEY plugin of the TYPE hook.
   * @param {String} hookName - e.g. 'tag'
@@ -142,9 +148,9 @@ function addTags_storyInsert(doc) {
 
 Any of your functions that use the above code should be followed by one of the following lines to specify your API version.  See the note on Versioning below to decide when to change your API version.
 
-```
-Extensions.registerHookType(hookName, apiVersion)
-Extensions.registerPluginType(hookName, apiVersion)
+```js
+Extensions.registerHookType(hookName, apiVersion);
+Extensions.registerPluginType(hookName, apiVersion);
 ```
 
 ## About Versioning

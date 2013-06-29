@@ -14,7 +14,7 @@ Hooks are generally used for lower level extensions, that sit in the middle of t
 
 ```json
 {
-	hooks: {
+	'hooks': {
 		'render': { api: '0.1.0', func: sanitize }
 	}
 }
@@ -26,8 +26,8 @@ Plugins are generally used for higher level extensions, and rely on a unique key
 
 ```json
 {
-	plugins: {
-		tag: {
+	'plugins': {
+		'tag': {
 			'b': { api: '0.1.0', func: bold },
 			'img': { api: '0.1.0', func: img }
 		}

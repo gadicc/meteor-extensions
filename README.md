@@ -12,9 +12,9 @@ This code is still very immature, but it works, and we will try avoid changes to
 
 Hooks are generally used for lower level extensions, that sit in the middle of the existing work flow of an application to do extra things (act on or change information).  A single hook may end up invoking any number of functions from various different extensions.
 
-```json
+```js
 {
-	'hooks': {
+	hooks: {
 		'render': { api: '0.1.0', func: sanitize }
 	}
 }
@@ -24,10 +24,10 @@ Hooks are generally used for lower level extensions, that sit in the middle of t
 
 Plugins are generally used for higher level extensions, and rely on a unique keyword to call it.  Calling a plugin is guaranteed to execute at most 1 function (or none).  Note that the JSON used to register a plugin includes TWO keys, both the name of the hook it's plugging into AND the unique keyword it wants to be registered with.
 
-```json
+```js
 {
-	'plugins': {
-		'tag': {
+	plugins: {
+		tag: {
 			'b': { api: '0.1.0', func: bold },
 			'img': { api: '0.1.0', func: img }
 		}

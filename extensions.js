@@ -1,5 +1,5 @@
 Extensions = {
-	hooks: {}, hookApis: {}, plugins: {}, pluginApis: {}, extensions: []
+	hooks: {}, hookApis: {}, plugins: {}, pluginApis: {}, extensions: {}
 };
 
 Extensions.registerHookType = function(hookName, apiVersion) {
@@ -67,13 +67,6 @@ Extensions.addHook = function(hookName, extName, extObj) {
 		this.hooks[hookName] = _.union([hookObj], this.hooks[hookName]);
 	else
 		this.hooks[hookName].push(hookObj);
-
-	this.extensions.push({
-		name: extObj.name,
-		author: extObj.author,
-		version: extObj.version,
-		description: extObj.description
-	});
 }
 
 Extensions.registerPlugin = function(hookName, extName, extObj, key) {
@@ -87,13 +80,6 @@ Extensions.registerPlugin = function(hookName, extName, extObj, key) {
 		api: extObj.api,
 		state: this.stateFromVersion(this.hookApis[hookName], extObj.api)
 	};
-
-	this.extensions.push({
-		name: extObj.name,
-		author: extObj.author,
-		version: extObj.version,
-		description: extObj.description
-	});
 }
 
 
@@ -120,6 +106,18 @@ Extensions.versionCheck = function(hookApi, extensionApi) {
  * Main public function to add a new extension to the wiki.  See extensions/README.md
  */
 Extensions.add = function(extData) {
+	if (this.extensions[extData.name]) {
+		console.log('An extension called "' + extData.name + "' already exists.");
+		return;
+	}
+
+	this.extensions[extData.name] = {
+		name: extData.name,
+		author: extData.author,
+		version: extData.version,
+		description: extData.description
+	};
+
 	if (extData.hooks)
 	for (hookName in extData.hooks) {
 		this.addHook(hookName, extData.name, extData.hooks[hookName]);

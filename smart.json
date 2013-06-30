@@ -3,7 +3,7 @@
     "description": "Add support for extensions (hooks, plugins) to your app",
     "homepage": "https://github.com/gadicohen/meteor-extensions",
     "author": "Gadi Cohen <dragon@wastelands.net>",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "git": "https://github.com/gadicohen/meteor-extensions.git",
 	"packages": {}
 }

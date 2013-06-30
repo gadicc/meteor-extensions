@@ -27,9 +27,10 @@ Extensions.registerPluginType = function(hookName, apiVersion) {
 				+ '" with different API version (was: ' + this.hookApis[hookName]
 				+ ', attempted: ' + apiVersion);
 
-		for (key in this.plugins[hookName])
-			if (!this.versionCheck(apiVersion, this.plugins[hookName][key]))
+		for (key in this.plugins[hookName]) {
+			if (!this.versionCheck(apiVersion, this.plugins[hookName][key].api))
 				this.plugins[hookName][key].state = 'disabled-api';
+		}
 
 	} else {
 

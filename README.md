@@ -95,8 +95,10 @@ function newDoc(name, content) {
 	doc = Extensions.runHookChain('storyInsert', doc);
 	collection.insert(doc);
 }
-Extension.registerHook('storyInsert', '0.1.0');
+Extension.registerHook('storyInsert', '0.1.0', legacyWrapperFunc*);
 ```
+
+* coming soon / TODO.  can be ommitted for none.
 
 *Extension:*
 ```js

@@ -138,8 +138,14 @@ Extensions.add = function(extData) {
 Extensions.runHookChain = function(hookName, initial) {
 	if (this.hooks[hookName])
 	for (var i=0; i < this.hooks[hookName].length; i++) {
-		if (this.hooks[hookName][i].state == 'enabled')
-			initial = this.hooks[hookName][i].func(initial);
+		if (this.hooks[hookName][i].state == 'enabled') {
+			try {
+				initial = this.hooks[hookName][i].func(initial);
+			}
+			catch (error) {
+				error_full(error, this.hooks[hookName][i].extName, hookName);
+			}
+		}
 	}
 	return initial;
 }
@@ -158,7 +164,12 @@ Extensions.runFirstTrueHook = function(hookName, data) {
 	for (var i=0; i < this.hooks[hookName].length; i++) {
 		if (this.hooks[hookName][i].state != 'enabled')
 			continue;
-		hookData = this.hooks[hookName][i].func(hookData);
+		try {
+			hookData = this.hooks[hookName][i].func(hookData);
+		}
+		catch (error) {
+			error_full(error, this.hooks[hookName][i].extName, hookName);
+		}
 		if (hookData.ranSomething) break;
 	}
 	return hookData;
@@ -173,8 +184,14 @@ Extensions.runHooks = function(hookName, data) {
 
 	if (this.hooks[hookName])
 	for (var i=0; i < this.hooks[hookName].length; i++) {
-		if (this.hooks[hookName][i].state == 'enabled')
-			this.hooks[hookName][i].func(data);
+		if (this.hooks[hookName][i].state == 'enabled') {
+			try {
+				this.hooks[hookName][i].func(data);
+			}
+			catch (error) {
+				error_full(error, this.hooks[hookName][i].extName, hookName);
+			}
+		}
 	}
 
 }
@@ -187,9 +204,43 @@ Extensions.runHooks = function(hookName, data) {
   * @return - return value of the function, false if it didn't exist
   */
 Extensions.runPlugin = function(hookName, pluginName, args) {
+	var out;
 	if (this.plugins[hookName] && this.plugins[hookName][pluginName]
-			&& this.plugins[hookName][pluginName].state == 'enabled')
-		return this.plugins[hookName][pluginName].func(args);
-	else
+			&& this.plugins[hookName][pluginName].state == 'enabled') {
+		try {
+			out = this.plugins[hookName][pluginName].func(args);
+			return out;
+		}
+		catch (error) {
+			error_full(error, this.plugins[hookName][pluginName].extName,
+				hookName + '/' + pluginName);
+		}
+	} else {
 		return false;
+	}
+}
+
+function error_full(error, extname, hookname) {
+	var out = '[ERROR] Extension "' + extname + '" is breaking on hook "'
+		+ hookName + '":\n'
+		+ '   ' + error.toString();
+
+	if (error && Error.captureStackTrace) {
+		// https://code.google.com/p/v8/wiki/JavaScriptStackTraceApi
+		// http://www.devthought.com/2011/12/22/a-string-is-not-an-error/
+		var orig = Error.prepareStackTrace;
+		Error.prepareStackTrace = function(error, stack) {
+			return stack;
+		}
+		Error.captureStackTrace(error_full);
+
+		for (var i=0; i < 1; i++)
+			out += '\n   at ' + error.stack[i].getFunctionName() + ' ('
+			+ error.stack[i].getFileName() + ':'
+			+ error.stack[i].getLineNumber() + ':'
+			+ error.stack[i].getColumnNumber() + ')';
+
+		Error.prepareStackTrace = orig;
+	}
+	console.log(out);
 }

@@ -193,4 +193,18 @@ Software version numbers often take the form of 1.2.3, where 1 is the major vers
 	</tr>
 </table>
 
-TODO:  1) funcs should be able to mark themselves as 'required', and if that particular func fails the version check, all functions the extension provides should be disabled.  2) Consider allowing the extension to specify API version ranges, e.g. to provide multiple functions to work with a variety of versions (I think this is less important).
+## TODO
+
+1. funcs should be able to mark themselves as 'required', and if that particular
+func fails the version check, all functions the extension provides should be
+disabled.
+
+2. allow apps to provide a legacyWrapper which will wrap/map the callling
+parameters and return values of extensions not compatible with current API.
+
+3. Extension.add should be re-runable if same extension name + version are
+provided (this is useful for server/client/common code).
+
+4. Complete priority support, to ensure that inserted hooks respect the ordering.
+Better yet, provide "before:" and "after:" properties to ensure inserted hooks
+are put in the right place.  (or "requires")

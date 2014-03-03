@@ -2,7 +2,7 @@ Extensions = {
 	hooks: {}, hookApis: {}, plugins: {}, pluginApis: {}, extensions: {}
 };
 
-Extensions.registerHookType = function(hookName, apiVersion) {
+Extensions.declareHook = function(hookName, apiVersion) {
 	if (this.hooks[hookName]) {
 
 		if (this.hookApis[hookName] && this.hookApis[hookName] != apiVersion)
@@ -19,7 +19,10 @@ Extensions.registerHookType = function(hookName, apiVersion) {
 		this.hookApis[hookName] = apiVersion;
 	}
 }
-Extensions.registerPluginType = function(hookName, apiVersion) {
+// deprecated
+Extensions.registerHookType = Extensions.declareHook;
+
+Extensions.declarePlugin = function(hookName, apiVersion) {
 	if (this.plugins[hookName]) {
 
 		if (this.pluginApis[hookName] && this.pluginApis[hookName] != apiVersion)
@@ -37,6 +40,8 @@ Extensions.registerPluginType = function(hookName, apiVersion) {
 		this.pluginApis[hookName] = apiVersion;
 	}
 }
+// deprecated
+Extensions.registerPluginType = Extensions.declarePlugin;
 
 Extensions.stateFromVersion = function(hookApiObj, extensionApi) {
 	if (hookApiObj) {
@@ -48,7 +53,7 @@ Extensions.stateFromVersion = function(hookApiObj, extensionApi) {
 	}
 }
 
-Extensions.addHook = function(hookName, extName, extObj) {
+Extensions.on = function(hookName, extName, extObj) {
 	// we don't REQUIRE the hook to exist first, to allow for flexible page load order
 	if (!this.hooks[hookName]) {
 		this.hooks[hookName] = [];
@@ -68,20 +73,23 @@ Extensions.addHook = function(hookName, extName, extObj) {
 	else
 		this.hooks[hookName].push(hookObj);
 }
+// deprecated
+Extensions.addHook = Extensions.on;
 
-Extensions.registerPlugin = function(hookName, extName, extObj, key) {
+Extensions.plugin = function(hookName, extName, extObj, pluginName) {
 	// we don't REQUIRE the hook to exist first, to allow for flexible page load order
-	if (!this.plugins[type])
-		this.plugins[type] = {};
+	if (!this.plugins[hookName])
+		this.plugins[hookName] = {};
 
-	this.plugins[type][key] = {
+	this.plugins[hookName][pluginName] = {
 		extName: extName,
 		func: extObj.func,
 		api: extObj.api,
 		state: this.stateFromVersion(this.hookApis[hookName], extObj.api)
 	};
 }
-
+// deprecated
+Extensions.registerPlugin = Extensions.plugin;
 
 Extensions.versionCheck = function(hookApi, extensionApi) {
 	var matches;
@@ -201,9 +209,10 @@ Extensions.runHooks = function(hookName, data) {
   * @param {String} hookName - e.g. 'tag'
   * @param {String} pluginName - e.g. 'h1'
   * @param {Object} args - any other data needed by the function
-  * @return - return value of the function, false if it didn't exist
+  * @param {Boolean} required - throw an error if none exist
+  * @return - return value of the function, undefined if it didn't exist
   */
-Extensions.runPlugin = function(hookName, pluginName, args) {
+Extensions.runPlugin = function(hookName, pluginName, args, required) {
 	var out;
 	if (this.plugins[hookName] && this.plugins[hookName][pluginName]
 			&& this.plugins[hookName][pluginName].state == 'enabled') {
@@ -216,11 +225,15 @@ Extensions.runPlugin = function(hookName, pluginName, args) {
 				hookName + '/' + pluginName);
 		}
 	} else {
-		return false;
+		if (required)
+			throw new Error('Plugin "' + hookName + ':' + pluginName + '" was '
+				+ 'marked as required but does not exist!');
+		else
+			return undefined;
 	}
 }
 
-function error_full(error, extname, hookname) {
+function error_full(error, extname, hookName) {
 	var out = '[ERROR] Extension "' + extname + '" is breaking on hook "'
 		+ hookName + '":\n'
 		+ '   ' + error.toString();
@@ -243,4 +256,23 @@ function error_full(error, extname, hookname) {
 		Error.prepareStackTrace = orig;
 	}
 	console.log(out);
+}
+
+Extension = function(extData) {
+    Extensions.add(extData);
+    this.meta = Extensions.extensions[extData.name];
+}
+Extension.prototype.on = function(hookName, api, func, options) {
+    Extensions.on(hookName, this.meta.name, {
+        func: func,
+        api: api,
+        priority: options && options.priority || 0
+    });
+}
+Extension.prototype.plugin = function(hookName, pluginName, api, func, options) {
+    Extensions.plugin(hookName, this.meta.name, {
+        func: func,
+        api: api,
+        priority: options && options.priority || 0
+    }, pluginName);
 }

@@ -95,7 +95,7 @@ function newDoc(name, content) {
 	doc = Extensions.runHookChain('storyInsert', doc);
 	collection.insert(doc);
 }
-Extension.registerHook('storyInsert', '0.1.0', legacyWrapperFunc*);
+Extensions.registerHookTtpe('storyInsert', '0.1.0', legacyWrapperFunc*);
 ```
 
 * coming soon / TODO.  can be ommitted for none.
@@ -154,6 +154,33 @@ Any of your functions that use the above code should be followed by one of the f
 Extensions.registerHookType(hookName, apiVersion);
 Extensions.registerPluginType(hookName, apiVersion);
 ```
+
+## Object orientated way
+
+Useful for multi file extensions, and for good readability without declaring
+/ naming functions outside of the extension scope.
+
+In first loaded file:
+
+```js
+ext = new Extension({
+    name: "digitalocean",
+    version: "0.1.0",
+    author: "Gadi Cohen <dragon@wastelands.net>",
+    description: "Digital Ocean support for WMD"
+});
+```
+
+Anywhere else in your package:
+
+```js
+ext.addHook('ssh.keygen', '0.1.0', sshKeyGenCallback(args));
+ext.registerPlugin('addApp', 'gitHub', '0.1.0', function(args) {
+	
+});
+```
+
+etc
 
 ## About Versioning
 

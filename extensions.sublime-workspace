@@ -1,0 +1,431 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"dyn",
+				"dyndnsHost"
+			],
+			[
+				"inst",
+				"installScripts	{}"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"p",
+				"privkey	(?)"
+			],
+			[
+				"ssh",
+				"sshKey"
+			],
+			[
+				"dropL",
+				"dropletDestroy"
+			],
+			[
+				"region",
+				"regionGetAll"
+			],
+			[
+				"update",
+				"updateInterval"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "extensions.js",
+			"settings":
+			{
+				"buffer_size": 7221,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "package.js",
+			"settings":
+			{
+				"buffer_size": 308,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 7464,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "smart.json",
+			"settings":
+			{
+				"buffer_size": 331,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 352.0,
+		"selected_items":
+		[
+			[
+				"tern",
+				"TernJS: Reload"
+			],
+			[
+				"ternj",
+				"TernJS: Reload"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: List Packages"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 328.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/dragon/www/projects/wmd/server/pages/user/user.html",
+		"/home/dragon/www/projects/wmd/server/wmd.js",
+		"/home/dragon/www/projects/wmd/server/commands.js",
+		"/home/dragon/www/projects/wmd/client/wmd-client.js",
+		"/home/dragon/www/projects/wmd/server/modules/user/user.css",
+		"/home/dragon/www/projects/wmd/server/modules/user/user.html",
+		"/home/dragon/www/projects/wmd/server/modules/user/user.js",
+		"/home/dragon/www/projects/wmd/server/pages/servers/servers.js",
+		"/home/dragon/www/projects/wmd/server/pages/serverInfo/serverInfo.js",
+		"/home/dragon/www/projects/wmd/README.md",
+		"/home/dragon/www/projects/wmd/client/dropletSetup.sh",
+		"/home/dragon/www/projects/wmd/client/package.json",
+		"/home/dragon/www/projects/wmd/wmd.sublime-project",
+		"/home/dragon/www/projects/wmd/server/pages/servers/servers.html",
+		"/home/dragon/www/projects/wmd/server/modules/servers/servers.js",
+		"/home/dragon/www/projects/wmd/server/pages/user/user.css",
+		"/home/dragon/www/projects/wmd/server/pages/logs/logs.css",
+		"/home/dragon/www/projects/wmd/server/pages/logs/logs.js",
+		"/home/dragon/www/projects/wmd/server/pages/logs/logs.html",
+		"/home/dragon/www/projects/wmd/server/packages.json",
+		"/home/dragon/www/projects/wmd/server/lib/models.js",
+		"/home/dragon/www/projects/wmd/server/lib/hooks.js",
+		"/home/dragon/www/projects/wmd/server/pages/user/user.js",
+		"/home/dragon/www/projects/wmd/server/wmd.html",
+		"/home/dragon/www/projects/wmd/server/wmd.css",
+		"/home/dragon/www/projects/wmd/server/pages/servers/servers.css",
+		"/home/dragon/www/projects/wmd/server/pages/serverInfo/serverInfo.html",
+		"/home/dragon/www/projects/wmd/server/pages/serverInfo/serverInfo.css",
+		"/home/dragon/www/projects/wmd/server/pages/apps/apps.html",
+		"/home/dragon/www/projects/wmd/server/pages/apps/apps.js",
+		"/home/dragon/www/projects/wmd/client/stats.js",
+		"/home/dragon/www/projects/wmd/server/pages/serversInfo/serverInfo.js",
+		"/home/dragon/www/projects/wmd/tests/stats/stats.js",
+		"/home/dragon/www/projects/wmd/wmd.html",
+		"/home/dragon/www/projects/wmd/wmd.js",
+		"/home/dragon/www/projects/wmd/stats/stats.js",
+		"/home/dragon/www/smart/messageformat/README.md",
+		"/home/dragon/www/smart/messageformat/messageformat-client.js",
+		"/home/dragon/www/smart/messageformat/messageformat.js",
+		"/home/dragon/www/smart/messageformat/package.js",
+		"/home/dragon/www/smart/messageformat/laika/tests/tests.js",
+		"/home/dragon/www/smart/messageformat/mk",
+		"/home/dragon/www/smart/messageformat/messageformat-server.js",
+		"/home/dragon/www/smart/messageformat/cli/mf_extract.js",
+		"/home/dragon/www/smart/messageformat/cli/mf_extract_wrapper.js",
+		"/home/dragon/www/smart/messageformat/cli/package.json",
+		"/home/dragon/www/smart/messageformat/website/docs/docs.js",
+		"/home/dragon/www/smart/messageformat/smart.json",
+		"/home/dragon/www/smart/messageformat/History.md",
+		"/home/dragon/www/smart/messageformat/website/docs/docs.html",
+		"/home/dragon/www/smart/messageformat/website/smart.json",
+		"/home/dragon/www/smart/messageformat/cli/README.md",
+		"/home/dragon/www/smart/mink/mink.sublime-project",
+		"/home/dragon/www/subl/mink.sublime-project",
+		"/home/dragon/www/smart/mink/mink-client.js"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"mkdir",
+			"__EOF__",
+			"console.log",
+			"username",
+			"devServer",
+			"self",
+			"eventdesc",
+			"do_destroy",
+			"suball",
+			"serverId",
+			"console.log",
+			"procs",
+			"console.log",
+			"message",
+			"mf_extract",
+			"params",
+			"processhtml",
+			"publish",
+			"meteor.methods"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"this"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "extensions.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7221,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "package.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 308,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7464,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "smart.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 331,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "extensions.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/www/subl/mink.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 193.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
